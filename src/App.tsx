@@ -25,7 +25,7 @@ function App() {
       <Header />
       
       {/* Main Content with z-index for footer reveal effect */}
-      <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl w-full overflow-x-hidden">
+      <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl w-full">
         <Hero />
         <AboutSection />
         <VideoShowcase />

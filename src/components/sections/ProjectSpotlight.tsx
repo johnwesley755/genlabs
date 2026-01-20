@@ -46,18 +46,19 @@ const ProjectSpotlight = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const sections = gsap.utils.toArray('.project-section', componentRef.current);
-            
-            sections.forEach((section: any, i) => {
-                ScrollTrigger.create({
-                    trigger: section,
-                    start: "top center",
-                    end: "bottom center",
-                    onEnter: () => setActiveProject(i),
-                    onEnterBack: () => setActiveProject(i),
-                });
+            ScrollTrigger.create({
+                trigger: componentRef.current,
+                start: "top top",
+                end: "bottom bottom",
+                onUpdate: (self) => {
+                    // Map scroll progress (0-1) to project index (0-3)
+                    const idx = Math.min(
+                        projects.length - 1,
+                        Math.floor(self.progress * projects.length)
+                    );
+                    setActiveProject(idx);
+                }
             });
-
         }, componentRef);
         return () => ctx.revert();
     }, []);

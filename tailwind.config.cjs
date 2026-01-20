@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         genMain: "#F5F5F5", // Light Gray/White Background
         genText: "#0A0A0A", // Almost Black Text
-        genGreen: "#D9FF00", // Brighter Green for Light Mode
+        genGreen: "#BCF000", // Brighter Green for Light Mode
         genBlack: "#0A0A0A", // Keep for legacy refs if needed, or map to genText
         genWhite: "#F5F5F5", // Keep for legacy refs
       },
