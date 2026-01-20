@@ -9,7 +9,7 @@ import FAQ from './components/sections/FAQ';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import AdvantageAccordion from './components/sections/AdvantageAccordion';
-import TracksHorizontal from './components/sections/TracksHorizontal';
+import TracksHorizontal from './components/sections/TrackHorizontal';
 
 import VideoShowcase from './components/sections/VideoShowcase';
 import Manifesto from './components/sections/Manifesto';

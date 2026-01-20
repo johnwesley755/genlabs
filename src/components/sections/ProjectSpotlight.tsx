@@ -2,47 +2,13 @@ import { useRef, useState, useLayoutEffect } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { projects } from '../../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSpotlight = () => {
     const componentRef = useRef<HTMLDivElement>(null);
     const [activeProject, setActiveProject] = useState(0);
-
-    const projects = [
-        {
-            id: "01",
-            title: "NEON_DREAMS",
-            category: "Cyberpunk UI Kit",
-            desc: "A complete design system for next-gen immersive web experiences. Built with React Three Fiber and WebGL to push the boundaries of browser performance.",
-            tags: ["React", "WebGL", "Three.js"],
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200"
-        },
-        {
-            id: "02",
-            title: "ECO_SENSE",
-            category: "Sustainable Fintech",
-            desc: "Gamifying carbon footprint tracking for GenZ investors. Helps users visualize the environmental impact of their portfolio in real-time.",
-            tags: ["Fintech", "Data Viz", "Mobile"],
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"
-        },
-        {
-            id: "03",
-            title: "AURA_AI",
-            category: "Fashion Tech",
-            desc: "Personalized style recommendations powered by deep learning. Analyzes user preferences to generate unique daily outfits.",
-            tags: ["AI/ML", "Python", "Fashion"],
-            image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1200"
-        },
-        {
-            id: "04",
-            title: "ZENITH",
-            category: "Space Tourism",
-            desc: "Booking system for the next frontier of travel. Features a 3D interactive globe and real-time flight availability tracking.",
-            tags: ["3D", "Travel", "Booking"],
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200"
-        }
-    ];
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -64,8 +30,8 @@ const ProjectSpotlight = () => {
     }, []);
 
     return (
-        <section ref={componentRef} className="bg-black text-white relative">
-            <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row">
+        <section ref={componentRef} className="bg-black text-white relative" style={{ height: `${projects.length * 100}vh` }}>
+            <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row h-full">
                 
                 {/* STICKY LEFT COLUMN - DETAILS */}
                 <div className="hidden md:flex w-1/2 h-screen sticky top-0 flex-col justify-center px-12 lg:px-24">
@@ -83,11 +49,11 @@ const ProjectSpotlight = () => {
                         </h2>
                         
                         <p className="text-xl text-white/60 mb-8 max-w-md">
-                            {projects[activeProject].desc}
+                            {projects[activeProject].description}
                         </p>
 
                         <div className="flex gap-3 mb-12">
-                            {projects[activeProject].tags.map((tag, i) => (
+                            {projects[activeProject].stats.map((tag, i) => (
                                 <span key={i} className="px-4 py-1 rounded-full border border-white/20 text-sm font-mono text-white/80">
                                     #{tag}
                                 </span>
@@ -108,7 +74,7 @@ const ProjectSpotlight = () => {
                             <div className="md:hidden mb-8">
                                 <span className="text-genGreen font-mono text-xs">{project.category}</span>
                                 <h3 className="text-4xl font-bold mt-2 mb-4">{project.title}</h3>
-                                <p className="text-white/60 text-sm">{project.desc}</p>
+                                <p className="text-white/60 text-sm">{project.description}</p>
                             </div>
 
                             <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden group cursor-none">

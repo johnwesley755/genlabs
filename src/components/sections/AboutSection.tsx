@@ -2,74 +2,46 @@ import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from '../ui/SplitText';
+import { aboutContent } from '../../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const imagesRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Parallax Grid
-            const images = imagesRef.current?.querySelectorAll('img');
-            if(images) {
-                gsap.from(images, {
+            // Parallax Text Reveal
+            gsap.fromTo(textRef.current, 
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.5,
+                    ease: "power3.out",
                     scrollTrigger: {
-                        trigger: imagesRef.current,
-                        start: "top bottom-=100",
-                        scrub: 1,
-                    },
-                    y: 100,
-                    opacity: 0,
-                    stagger: 0.1,
-                    duration: 1
-                })
-            }
-        }, containerRef);
+                        trigger: sectionRef.current,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: 1
+                    }
+                }
+            );
+        }, sectionRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={containerRef} id="about" className="py-24 px-8 bg-genMain relative overflow-hidden">
-            <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 relative z-10 items-center">
-                <div className="space-y-8 md:space-y-12">
-                     <div className="overflow-hidden">
-                        <SplitText className="text-6xl md:text-9xl font-bold tracking-tighter leading-[0.85] text-black">
-                            WE ARE
-                        </SplitText>
-                        <br/>
-                        <SplitText className="text-6xl md:text-9xl font-bold tracking-tighter leading-[0.85] text-genGreen" delay={0.2}>
-                            GENZ COMMUNITY
-                        </SplitText>
-                     </div>
-
-                     <p className="text-lg md:text-2xl font-light leading-relaxed max-w-xl text-black/80">
-                         A vibe space for designers, creators, and tech enthusiasts to connect, and level up! Meet your tribe, grow your network, and stay ahead in a world that never hits pause.
-                     </p>
-                     
-                     <div className="grid grid-cols-2 gap-8 pt-8 border-t border-black/10">
-                         <div>
-                             <h4 className="font-mono text-xs md:text-sm text-black/50 mb-2">CHANGEMAKERS</h4>
-                             <p className="text-3xl md:text-5xl font-bold tabular-nums">7,000+</p>
-                         </div>
-                         <div>
-                             <h4 className="font-mono text-xs md:text-sm text-black/50 mb-2">GLOBAL MENTORS</h4>
-                             <p className="text-3xl md:text-5xl font-bold tabular-nums">100+</p>
-                         </div>
-                     </div>
-                </div>
-                
-                <div ref={imagesRef} className="grid grid-cols-2 gap-4 h-[80vh]">
-                    <div className="space-y-4 pt-24 self-start">
-                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" className="w-full h-80 object-cover rounded-[2rem] hover:scale-95 transition-transform duration-700" />
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" className="w-full h-64 object-cover rounded-[2rem] hover:scale-95 transition-transform duration-700" />
-                    </div>
-                    <div className="space-y-4 self-end">
-                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" className="w-full h-64 object-cover rounded-[2rem] hover:scale-95 transition-transform duration-700" />
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" className="w-full h-96 object-cover rounded-[2rem] hover:scale-95 transition-transform duration-700" />
-                    </div>
-                </div>
+        <section ref={sectionRef} id="about" className="min-h-[50vh] flex items-center justify-center py-32 px-4 bg-genMain overflow-hidden">
+            <div ref={textRef} className="max-w-4xl mx-auto text-center will-change-transform">
+                 <span className="text-genGreen font-mono text-sm tracking-widest uppercase mb-6 block">/// {aboutContent.badge}</span>
+                 <SplitText className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-8">
+                     {aboutContent.title}
+                 </SplitText>
+                 <p className="text-lg md:text-xl text-black/60 leading-relaxed max-w-2xl mx-auto font-light">
+                     {aboutContent.description}
+                 </p>
             </div>
         </section>
     );

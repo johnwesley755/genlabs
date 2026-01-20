@@ -1,111 +1,99 @@
+import { useState, useRef, useLayoutEffect } from 'react';
+import { Plus, Minus } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { advantages } from '../../data/content';
 
-
+gsap.registerPlugin(ScrollTrigger);
 
 const AdvantageAccordion = () => {
-    const list = [
-        {
-            id: "01",
-            title: "Soft Skills",
-            desc: "Master communication, public speaking, and teamwork to thrive in any professional setting.",
-            tags: ["Public Speaking", "Leadership", "Empathy"],
-            img: "https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=800&auto=format&fit=crop"
-        },
-        {
-            id: "02",
-            title: "Community",
-            desc: "Connect with a vibrant network of learners, designers, and mentors to grow together.",
-            tags: ["Networking", "Peer Learning", "Events"],
-            img: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=800&auto=format&fit=crop"
-        },
-        {
-            id: "03",
-            title: "Live Projects",
-            desc: "Work on real-world challenges, collaborate with experts, and gain hands-on experience.",
-            tags: ["Real Clients", "Shippable Code", "Portfolio"],
-            img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
-        },
-        {
-            id: "04",
-            title: "Career",
-            desc: "Unlock job and internship placements with top companies through our strong network.",
-            tags: ["Placements", "Resume Review", "Interviews"],
-            img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
-        }
-    ];
+    const [activeIndex, setActiveIndex] = useState<number | null>(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            // Image Parallax Effect
+            const images = gsap.utils.toArray('.advantage-img') as HTMLImageElement[];
+            
+            images.forEach((img) => {
+                gsap.to(img, {
+                    y: "20%", // Move image down slightly as we scroll
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: img.parentElement, // Trigger on the image wrapper
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            });
+
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <section className="bg-genMain py-32 px-4 overflow-hidden">
-             <div className="max-w-[1800px] mx-auto">
-                 <p className="font-mono text-black/40 mb-12 uppercase tracking-widest pl-4">The GenLab Advantage</p>
-                 
-                 <div className="flex flex-col">
-                     {list.map((item) => (
-                         <AccordionItem key={item.id} item={item} />
-                     ))}
-                 </div>
-             </div>
+        <section ref={containerRef} className="bg-genMain py-32 px-4 overflow-hidden" id="advantage">
+            <div className="max-w-[1600px] mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                    {/* Header - Sticky Left Column */}
+                    <div className="lg:col-span-5 self-start sticky top-32">
+                        <span className="text-genGreen font-mono text-xs tracking-widest uppercase mb-6 block">/// WHY_GENLAB</span>
+                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 leading-[0.85] text-black">
+                            ADVANTAGE<br/>ENGINE
+                        </h2>
+                        <p className="text-black/60 text-xl leading-relaxed max-w-md font-light">
+                            We don't just teach code. We install the operating system for high-velocity career growth.
+                        </p>
+                    </div>
+
+                    {/* Accordion List - Right Column */}
+                    <div className="lg:col-span-7">
+                        {advantages.map((item, index) => (
+                            <div 
+                                key={item.id}
+                                className="border-b border-black/10 group first:border-t"
+                            >
+                                <button
+                                    onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                                    className="w-full py-10 flex items-start justify-between text-left relative z-20 group hover:bg-white/40 transition-colors duration-300 px-4 -mx-4 rounded-xl"
+                                >
+                                    <div className="flex items-center gap-12">
+                                        <span className="font-mono text-sm text-black/30 w-8">0{index + 1}</span>
+                                        <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-black">
+                                            {item.title}
+                                        </h3>
+                                    </div>
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${activeIndex === index ? 'bg-black text-white rotate-0' : 'bg-transparent border border-black/10 text-black hover:border-black'}`}>
+                                        {activeIndex === index ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                                    </div>
+                                </button>
+                                
+                                <div 
+                                    className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${activeIndex === index ? 'max-h-[600px] opacity-100 pb-12' : 'max-h-0 opacity-0 pb-0'}`}
+                                >
+                                    <div className="pl-[4.5rem] flex flex-col md:flex-row gap-12 items-center">
+                                        <div className="flex-1">
+                                            <p className="text-xl leading-relaxed text-black/70 font-light">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                        <div className="w-full md:w-72 h-48 rounded-2xl overflow-hidden bg-black/5 relative shrink-0 shadow-xl shadow-black/5">
+                                            <img 
+                                                src={item.image} 
+                                                alt="" 
+                                                className="advantage-img w-full h-[120%] object-cover grayscale transition-all duration-700 hover:scale-105 hover:grayscale-0 -mt-[10%]" 
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </section>
     );
 };
-
-interface AccordionItemProps {
-    id: string;
-    title: string;
-    desc: string;
-    tags: string[];
-    img: string;
-}
-
-const AccordionItem = ({ item }: { item: AccordionItemProps }) => {
-    return (
-        <div className="group relative border-t border-black/10 last:border-b transition-all duration-500 hover:bg-black hover:text-white cursor-none overflow-hidden">
-            {/* Background Image Reveal */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-700 ease-out pointer-events-none"
-                 style={{ clipPath: 'inset(0 100% 0 0)' }}> {/* Default hidden */}
-                 <img src={item.img} className="w-full h-full object-cover grayscale" />
-            </div>
-            {/* CSS to animate clip-path on hover */}
-            <style dangerouslySetInnerHTML={{__html: `
-                .group:hover .absolute[style*="clip-path"] {
-                    clip-path: inset(0 0 0 0) !important;
-                }
-            `}} />
-
-             <div className="relative z-10 p-6 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8 h-auto md:h-[200px] group-hover:md:h-[400px] transition-all duration-500 ease-out">
-                  <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12">
-                      <span className="font-mono text-black/30 group-hover:text-genGreen transition-colors text-xl">
-                          {item.id}
-                      </span>
-                      <h3 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter uppercase break-words w-full">
-                          {item.title}
-                      </h3>
-                  </div>
-
-                  <div className="md:max-w-md opacity-100 md:opacity-0 group-hover:opacity-100 translate-y-0 md:translate-y-10 group-hover:md:translate-y-0 transition-all duration-500 delay-100">
-                      <p className="text-sm md:text-lg leading-relaxed mb-6 text-black/80 md:text-white/80 dark-mode-text-override">
-                          {item.desc}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                          {item.tags.map((tag: string) => (
-                              <span key={tag} className="px-3 py-1 md:px-4 md:py-2 rounded-full border border-black/10 md:border-white/20 text-xs font-mono uppercase bg-white/5">
-                                  {tag}
-                              </span>
-                          ))}
-                      </div>
-                  </div>
-
-                 <button className="w-16 h-16 rounded-full border border-current flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:bg-genGreen group-hover:text-black group-hover:border-genGreen">
-                     <Arrowdown className="w-6 h-6 -rotate-90" />
-                 </button>
-            </div>
-        </div>
-    )
-}
-
-const Arrowdown = ({ className }: {className?: string}) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-)
 
 export default AdvantageAccordion;

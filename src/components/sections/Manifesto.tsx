@@ -1,46 +1,48 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { twMerge } from 'tailwind-merge';
+import { manifestoContent } from '../../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Manifesto = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLHeadingElement>(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-             const words = textRef.current?.querySelectorAll('.word');
-             
-             if(words) {
-                 gsap.fromTo(words, 
-                    { opacity: 0.1, y: 50 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        stagger: 0.1,
-                        scrollTrigger: {
-                            trigger: containerRef.current,
-                            start: "top center",
-                            end: "bottom center",
-                            scrub: 1
-                        }
+            
+            const words = textRef.current?.querySelectorAll('.word');
+            
+            gsap.fromTo(words, 
+                { opacity: 0.2, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 80%",
+                        end: "bottom 80%",
+                        scrub: 1
                     }
-                 )
-             }
-        }, containerRef);
+                }
+            );
+
+        }, sectionRef);
         return () => ctx.revert();
     }, []);
 
-    const content = "WE BELIEVE IN THE POWER OF CODE. WE BELIEVE IN THE ART OF DESIGN. WE ARE NOT JUST BUILDING APPS; WE ARE CRAFTING EXPERIENCES THAT DEFINE THE NEXT GENERATION.";
+    const words = manifestoContent.split(" ");
 
     return (
-        <section ref={containerRef} className="min-h-screen bg-black text-white flex items-center justify-center py-24 px-4 overflow-hidden">
-            <div ref={textRef} className="max-w-[1600px] text-center flex flex-wrap justify-center gap-x-4 md:gap-x-8 gap-y-2 md:gap-y-4">
-                {content.split(' ').map((word, i) => (
-                    <span key={i} className="word text-4xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.8] inline-block">{word}</span>
-                ))}
+        <section ref={sectionRef} className="py-32 px-4 bg-black text-white overflow-hidden min-h-[50vh] flex items-center justify-center">
+            <div className="max-w-[1800px] mx-auto text-center">
+                <h2 ref={textRef} className="text-4xl md:text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.9] flex flex-wrap justify-center gap-x-6 gap-y-2">
+                    {words.map((word, i) => (
+                        <span key={i} className="word inline-block opacity-20">{word}</span>
+                    ))}
+                </h2>
             </div>
         </section>
     );

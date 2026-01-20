@@ -1,27 +1,9 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import { faqData } from '../../data/content';
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-    const questions = [
-        {
-            q: "What is GenLab IB?",
-            a: "GenLab IB is a GenZ-first community and ed-tech platform designed to bridge the gap between academic learning and industry reality through mentorship and live projects."
-        },
-        {
-            q: "Who can join GenLab IB?",
-            a: "Any student or early professional hungry to learn. Whether you're a designer, developer, or product enthusiast, there's a place for you here."
-        },
-        {
-            q: "Is there a membership fee?",
-            a: "Joining the community is free! We offer premium tracks and mentorship programs for those looking for dedicated, structured growth."
-        },
-        {
-            q: "How can I get involved in events?",
-            a: "Follow our events page or join our Discord. We host weekly workshops, AMAs, and hackathons that are open to all members."
-        }
-    ];
 
     return (
         <section className="bg-genMain py-32 px-4 relative z-10 border-t border-black/5" id="faq">
@@ -40,7 +22,7 @@ const FAQ = () => {
 
                     {/* Accordion List */}
                     <div className="md:w-2/3 space-y-0">
-                        {questions.map((item, i) => (
+                        {faqData.map((item, i) => (
                             <div 
                                 key={i} 
                                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -50,7 +32,7 @@ const FAQ = () => {
                                     <div className="flex gap-8">
                                         <span className="font-mono text-genGreen text-sm mt-2">0{i + 1}</span>
                                         <h3 className={`text-2xl md:text-4xl font-bold transition-colors duration-300 ${openIndex === i ? 'text-black' : 'text-black/70 group-hover:text-black'}`}>
-                                            {item.q}
+                                            {item.question}
                                         </h3>
                                     </div>
                                     <div className={`w-8 h-8 flex items-center justify-center shrink-0 transition-all duration-500 ${openIndex === i ? 'rotate-180 text-genGreen' : 'rotate-0 text-black/40'}`}>
@@ -63,7 +45,7 @@ const FAQ = () => {
                                 >
                                     <div className="overflow-hidden pl-14 md:pl-[4.5rem] pr-8">
                                         <p className="text-xl leading-relaxed text-black/60 max-w-2xl">
-                                            {item.a}
+                                            {item.answer}
                                         </p>
                                     </div>
                                 </div>

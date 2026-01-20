@@ -1,129 +1,130 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useState } from 'react';
+import { ArrowUpRight, Clock } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { events } from '../../data/content';
 
 const EventsSection = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const cardRef = useRef<HTMLDivElement>(null);
-    const timeRef = useRef<HTMLDivElement>(null);
-
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top center",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            tl.from(cardRef.current, {
-                x: -100,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            })
-            .from(timeRef.current, {
-                x: 100,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            }, "-=0.8");
-            
-        }, sectionRef);
-        return () => ctx.revert();
-    }, []);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const activeEvent = events[activeIndex];
 
     return (
-        <section ref={sectionRef} id="events" className="bg-genMain py-24 px-4 border-b border-black/5 overflow-hidden">
-             <div className="max-w-[1800px] mx-auto">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16">
-                     <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mix-blend-difference text-black/5 mb-4 md:mb-0">EVENTS</h2>
-                     <div className="text-left md:text-right">
-                         <h3 className="text-xl md:text-2xl font-bold">Upcoming_Connect</h3>
-                         <p className="font-mono text-sm text-black/40">Don't miss the vibe.</p>
+        <section id="events" className="relative py-24 md:py-32 bg-black text-white overflow-hidden min-h-screen flex flex-col justify-center">
+             
+             {/* Background Image Transition Layer */}
+             <div className="absolute inset-0 z-0 opacity-30 md:opacity-50 transition-all duration-700 ease-in-out">
+                 {events.map((event, index) => (
+                     <div 
+                        key={event.id}
+                        className={twMerge(
+                            "absolute inset-0 transition-opacity duration-700 ease-in-out",
+                            activeIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
+                        )}
+                     >
+                         <img src={event.image} alt="" className="w-full h-full object-cover grayscale md:grayscale-0 contrast-125" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+                         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
                      </div>
-                </div>
+                 ))}
+             </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                     {/* Main Event Card */}
-                     <div ref={cardRef} className="bg-black text-white p-12 rounded-[3rem] relative overflow-hidden group">
-                         <div className="absolute top-0 right-0 p-8">
-                            <ArrowIcon className="w-12 h-12 group-hover:rotate-45 transition-transform duration-500" />
-                         </div>
-                         
-                         <div className="space-y-8 relative z-10 h-full flex flex-col justify-between">
-                            <div>
-                                <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-xs font-mono mb-6">
-                                    EXCLUSIVE_MEETUP
-                                </span>
-                                <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
-                                    Friends of Design<br/>
-                                    <span className="text-genGreen">Monthly Connect</span>
-                                </h3>
-                                <p className="text-white/60 max-w-md text-base md:text-lg">
-                                    This is not just another meetup – it’s a power-packed session designed for GenZ professionals.
-                                </p>
-                            </div>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div>
-                                    <p className="text-xs text-genGreen font-mono uppercase mb-1">DATE</p>
-                                    <p className="text-3xl font-bold">20 JAN</p>
-                                </div>
-                                <div>
-                                    <p className="text-xs text-genGreen font-mono uppercase mb-1">TIME</p>
-                                    <p className="text-3xl font-bold">10:00 AM</p>
-                                </div>
-                                <div>
-                                    <p className="text-xs text-genGreen font-mono uppercase mb-1">LOCATION</p>
-                                    <p className="text-xl font-bold leading-tight">GenLab IB Office<br/>Nagercoil</p>
-                                </div>
-                            </div>
-                         </div>
-                         
-                         {/* Abstract BG */}
-                         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-genGreen/20 blur-[100px] rounded-full pointer-events-none" />
+             <div className="relative z-10 max-w-[1800px] w-full mx-auto px-4 md:px-8">
+                 <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end">
+                     <div>
+                        <span className="text-genGreen font-mono text-sm tracking-widest uppercase mb-4 block">/// CONNECT_WITH_US</span>
+                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">
+                            UPCOMING<br/>EVENTS
+                        </h2>
                      </div>
+                 </div>
 
-                     {/* Countdown / Secondary */}
-                     <div ref={timeRef} className="space-y-8">
-                         <div className="bg-white border border-black/5 p-12 rounded-[3rem] h-full flex flex-col items-center justify-center text-center shadow-sm">
-                             <p className="font-mono text-sm uppercase tracking-widest text-black/40 mb-8">Event Starts In</p>
-                             <div className="flex gap-4 md:gap-12 text-black">
-                                 <div>
-                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">12</span>
-                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">HOURS</p>
+                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
+                     {/* LEFT: LIST */}
+                     <div className="flex-1 flex flex-col">
+                         {events.map((event, index) => (
+                             <div 
+                                key={event.id}
+                                onMouseEnter={() => setActiveIndex(index)}
+                                className={twMerge(
+                                    "group relative border-t border-white/10 py-8 md:py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer hover:bg-white/5 transition-all duration-300",
+                                    activeIndex === index ? "border-white/40 bg-white/5" : ""
+                                )}
+                             >
+                                 {/* Date & Category */}
+                                 <div className="flex items-start md:items-center gap-8 md:w-2/3">
+                                     <div className={twMerge("text-xs md:text-sm uppercase tracking-widest min-w-[80px] font-mono", activeIndex === index ? "text-genGreen" : "text-white/40")}>
+                                         {event.date}
+                                     </div>
+                                     <div>
+                                         <h3 className="text-2xl md:text-4xl font-bold tracking-tight group-hover:translate-x-4 transition-transform duration-300 mb-2">
+                                             {event.title}
+                                         </h3>
+                                          <div className="flex items-center gap-3 text-sm text-white/50">
+                                             <span className="bg-white/10 px-2 py-0.5 rounded textxs font-mono">{event.category}</span>
+                                             <span>{event.location}</span>
+                                          </div>
+                                     </div>
                                  </div>
-                                 <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-black/10">:</span>
-                                 <div>
-                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">57</span>
-                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">MINUTES</p>
-                                 </div>
-                                 <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-black/10">:</span>
-                                  <div>
-                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">41</span>
-                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">SECONDS</p>
+
+                                 {/* Action */}
+                                 <div className="flex items-center justify-between md:justify-end md:w-1/3">
+                                     <div className={twMerge(
+                                         "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 transform group-hover:rotate-45",
+                                         activeIndex === index ? "bg-genGreen text-black border-genGreen scale-110" : "border-white/20 text-white"
+                                     )}>
+                                         <ArrowUpRight className="w-5 h-5" />
+                                     </div>
                                  </div>
                              </div>
-                             <button className="mt-12 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-genGreen hover:text-black transition-colors w-full md:w-auto">
-                                 RESERVE YOUR SEAT NOW
-                             </button>
-                         </div>
+                         ))}
+                         <div className="border-t border-white/10" />
                      </div>
-                </div>
+
+                     {/* RIGHT: STICKY COUNTER & DETAILS (Desktop) */}
+                     <div className="hidden lg:block w-[400px] h-fit sticky top-32 perspective-1000">
+                        <div key={activeEvent.id} className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] shadow-2xl animate-fade-in-up">
+                            <div className="mb-8">
+                                <p className="text-genGreen text-xs font-mono uppercase tracking-widest mb-2">SELECTED_EVENT</p>
+                                <h4 className="text-2xl font-bold leading-tight">{activeEvent.title}</h4>
+                            </div>
+
+                            {/* TIMER */}
+                            <div className="bg-black/40 rounded-2xl p-6 mb-8 border border-white/5">
+                                <div className="flex items-center gap-2 mb-4 text-white/40 text-xs font-mono uppercase">
+                                    <Clock className="w-3 h-3" /> Starts In
+                                </div>
+                                <div className="flex justify-between items-end text-center">
+                                     <div>
+                                         <span className="text-4xl font-bold tracking-tighter block leading-none">04</span>
+                                         <span className="text-[10px] text-white/30 font-mono uppercase">Days</span>
+                                     </div>
+                                     <span className="text-2xl text-white/20 pb-2">:</span>
+                                     <div>
+                                         <span className="text-4xl font-bold tracking-tighter block leading-none">12</span>
+                                         <span className="text-[10px] text-white/30 font-mono uppercase">Hrs</span>
+                                     </div>
+                                     <span className="text-2xl text-white/20 pb-2">:</span>
+                                     <div>
+                                         <span className="text-4xl font-bold tracking-tighter block leading-none">38</span>
+                                         <span className="text-[10px] text-white/30 font-mono uppercase">Mins</span>
+                                     </div>
+                                </div>
+                            </div>
+
+                            <p className="text-white/60 text-sm leading-relaxed mb-8">
+                                {activeEvent.description}
+                                <br/><br/>
+                                Limited seats available for this session. Reserve your spot now to get access to exclusive resources.
+                            </p>
+
+                            <button className="w-full py-4 bg-white text-black rounded-full font-bold uppercase tracking-widest hover:bg-genGreen transition-colors duration-300">
+                                Register_Now
+                            </button>
+                        </div>
+                     </div>
+                 </div>
              </div>
         </section>
     );
 };
-
-const ArrowIcon = ({ className }: { className?: string }) => (
-    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
 
 export default EventsSection;
