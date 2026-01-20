@@ -38,7 +38,7 @@ const EventsSection = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} id="events" className="bg-genMain py-24 px-4 border-b border-black/5">
+        <section ref={sectionRef} id="events" className="bg-genMain py-24 px-4 border-b border-black/5 overflow-hidden">
              <div className="max-w-[1800px] mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16">
                      <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mix-blend-difference text-black/5 mb-4 md:mb-0">EVENTS</h2>

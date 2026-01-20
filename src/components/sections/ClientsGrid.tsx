@@ -13,7 +13,7 @@ const MentorsGrid = () => {
     ];
 
     return (
-        <section className="bg-genMain py-24 px-4 border-y border-black/5 bg-grid-pattern">
+        <section className="bg-genMain py-24 px-4 border-y border-black/5 bg-grid-pattern overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                      <h2 className="text-6xl font-bold tracking-tighter text-genText">OUR_MENTORS</h2>

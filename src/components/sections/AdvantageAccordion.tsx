@@ -34,7 +34,7 @@ const AdvantageAccordion = () => {
     ];
 
     return (
-        <section className="bg-genMain py-32 px-4">
+        <section className="bg-genMain py-32 px-4 overflow-hidden">
              <div className="max-w-[1800px] mx-auto">
                  <p className="font-mono text-black/40 mb-12 uppercase tracking-widest pl-4">The GenLab Advantage</p>
                  

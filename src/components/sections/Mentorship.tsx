@@ -31,7 +31,7 @@ const Mentorship = () => {
     }, []);
 
     return (
-        <section ref={triggerRef} className="bg-genMain relative">
+        <section ref={triggerRef} className="bg-genMain relative overflow-hidden">
              <div className="min-h-[200vh] relative">
                  <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-8 overflow-hidden">
                      <h2 className="text-center text-[10vw] font-bold tracking-tighter mb-12 leading-none">
