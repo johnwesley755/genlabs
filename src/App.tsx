@@ -1,7 +1,6 @@
 import SmoothScrollProvider from './components/providers/SmoothScrollProvider';
 import CustomCursor from './components/ui/CustomCursor';
 import Hero from './components/sections/Hero';
-import TeamMarquee from './components/sections/TeamMarquee';
 import AboutSection from './components/sections/AboutSection';
 import EventsSection from './components/sections/EventsSection';
 import ImpactMetrics from './components/sections/ImpactMetrics';
@@ -13,6 +12,8 @@ import AdvantageAccordion from './components/sections/AdvantageAccordion';
 import TracksHorizontal from './components/sections/TracksHorizontal';
 
 import VideoShowcase from './components/sections/VideoShowcase';
+import Manifesto from './components/sections/Manifesto';
+import CommunityGallery from './components/sections/CommunityGallery';
 
 function App() {
   return (
@@ -29,8 +30,10 @@ function App() {
         <Hero />
         <AboutSection />
         <VideoShowcase />
+        <Manifesto />
         <AdvantageAccordion />
         <EventsSection />
+        <CommunityGallery />
         <TracksHorizontal />
 
         <ImpactMetrics />
