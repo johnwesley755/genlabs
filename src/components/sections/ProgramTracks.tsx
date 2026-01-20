@@ -71,7 +71,7 @@ const ProgramTracks = () => {
                         title="Design Foundation"
                         desc="Unlearn the fluff. Relearn what matters. Build a rock-solid foundation in design thinking."
                         tags={['Principles', 'History', 'Systems']}
-                        image="https://images.unsplash.com/photo-1596162955779-9c897f2b704c?q=80&w=600&auto=format&fit=crop" 
+                        image="https://bootflow.academy/wp-content/uploads/2022/07/UI-UX-Design.jpeg" 
                      />
                      {/* Track 2 - Meeting Room/Sunset */}
                      <TrackCard 

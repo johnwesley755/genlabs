@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
+import { Menu } from 'lucide-react';
+
 import Logo from '../ui/Logo';
+import Sheet from '../ui/Sheet';
 import { useLenis } from '@studio-freight/react-lenis';
 import { twMerge } from 'tailwind-merge';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const lenis = useLenis(({ scroll }) => {
         setIsScrolled(scroll > 50);
     });
 
     const scrollToSection = (id: string) => {
-        const element = document.querySelector(id);
+        const element = document.querySelector(`#${id}`);
         if (element && lenis) {
             lenis.scrollTo(element);
         }
@@ -25,8 +29,9 @@ const Header = () => {
         >
             <Logo />
 
-            <nav className="flex items-center gap-8">
-                {['home', 'events', 'about', 'join'].map((item) => (
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-8">
+                {['events', 'about', 'mentorship'].map((item) => (
                     <button 
                         key={item}
                         onClick={() => scrollToSection(item)}
@@ -42,6 +47,37 @@ const Header = () => {
                     GET_STARTED
                 </button>
             </nav>
+
+            {/* Mobile Nav Toggle */}
+            <button 
+                className="md:hidden relative z-50 p-2 hover:bg-black/5 rounded-full transition-colors"
+                onClick={() => setIsMenuOpen(true)}
+                aria-label="Open Menu"
+            >
+                <Menu className="w-8 h-8 text-black" />
+            </button>
+
+            {/* Mobile Sheet */}
+            <Sheet isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+                <div className="flex flex-col items-start justify-center h-full gap-8">
+                    {['events', 'about', 'mentorship'].map((item) => (
+                        <button 
+                            key={item}
+                            onClick={() => {
+                                scrollToSection(item);
+                                setIsMenuOpen(false);
+                            }}
+                            className="text-4xl font-bold uppercase tracking-tighter hover:text-genGreen transition-colors text-left"
+                        >
+                            {item}
+                        </button>
+                    ))}
+                    <div className="w-full h-[1px] bg-black/10 my-4" />
+                    <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-mono uppercase hover:bg-genGreen hover:text-black transition-colors w-full">
+                        GET_STARTED
+                    </button>
+                </div>
+            </Sheet>
         </header>
     );
 };

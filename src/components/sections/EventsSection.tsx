@@ -40,11 +40,11 @@ const EventsSection = () => {
     return (
         <section ref={sectionRef} id="events" className="bg-genMain py-24 px-4 border-b border-black/5">
              <div className="max-w-[1800px] mx-auto">
-                <div className="flex items-end justify-between mb-16">
-                     <h2 className="text-8xl font-bold tracking-tighter mix-blend-difference text-black/5">EVENTS</h2>
-                     <div className="text-right">
-                         <h3 className="text-2xl font-bold">Upcoming_Connect</h3>
-                         <p className="font-mono text-black/40">Don't miss the vibe.</p>
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16">
+                     <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mix-blend-difference text-black/5 mb-4 md:mb-0">EVENTS</h2>
+                     <div className="text-left md:text-right">
+                         <h3 className="text-xl md:text-2xl font-bold">Upcoming_Connect</h3>
+                         <p className="font-mono text-sm text-black/40">Don't miss the vibe.</p>
                      </div>
                 </div>
 
@@ -60,16 +60,16 @@ const EventsSection = () => {
                                 <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-xs font-mono mb-6">
                                     EXCLUSIVE_MEETUP
                                 </span>
-                                <h3 className="text-5xl font-bold leading-tight mb-4">
+                                <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
                                     Friends of Design<br/>
                                     <span className="text-genGreen">Monthly Connect</span>
                                 </h3>
-                                <p className="text-white/60 max-w-md text-lg">
+                                <p className="text-white/60 max-w-md text-base md:text-lg">
                                     This is not just another meetup – it’s a power-packed session designed for GenZ professionals.
                                 </p>
                             </div>
                             
-                            <div className="grid grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 <div>
                                     <p className="text-xs text-genGreen font-mono uppercase mb-1">DATE</p>
                                     <p className="text-3xl font-bold">20 JAN</p>
@@ -95,18 +95,18 @@ const EventsSection = () => {
                              <p className="font-mono text-sm uppercase tracking-widest text-black/40 mb-8">Event Starts In</p>
                              <div className="flex gap-4 md:gap-12 text-black">
                                  <div>
-                                     <span className="text-6xl md:text-8xl font-bold tracking-tighter">12</span>
-                                     <p className="text-xs font-mono mt-2">HOURS</p>
+                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">12</span>
+                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">HOURS</p>
                                  </div>
-                                 <span className="text-6xl md:text-8xl font-bold text-black/10">:</span>
+                                 <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-black/10">:</span>
                                  <div>
-                                     <span className="text-6xl md:text-8xl font-bold tracking-tighter">57</span>
-                                     <p className="text-xs font-mono mt-2">MINUTES</p>
+                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">57</span>
+                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">MINUTES</p>
                                  </div>
-                                 <span className="text-6xl md:text-8xl font-bold text-black/10">:</span>
+                                 <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-black/10">:</span>
                                   <div>
-                                     <span className="text-6xl md:text-8xl font-bold tracking-tighter">41</span>
-                                     <p className="text-xs font-mono mt-2">SECONDS</p>
+                                     <span className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter">41</span>
+                                     <p className="text-[10px] md:text-xs font-mono mt-2 transition-colors">SECONDS</p>
                                  </div>
                              </div>
                              <button className="mt-12 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-genGreen hover:text-black transition-colors w-full md:w-auto">

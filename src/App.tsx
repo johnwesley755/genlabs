@@ -4,13 +4,15 @@ import Hero from './components/sections/Hero';
 import TeamMarquee from './components/sections/TeamMarquee';
 import AboutSection from './components/sections/AboutSection';
 import EventsSection from './components/sections/EventsSection';
-import Mentorship from './components/sections/Mentorship';
-import ClientsGrid from './components/sections/ClientsGrid';
+import ImpactMetrics from './components/sections/ImpactMetrics';
+import ProjectSpotlight from './components/sections/ProjectSpotlight';
 import FAQ from './components/sections/FAQ';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import AdvantageAccordion from './components/sections/AdvantageAccordion';
 import TracksHorizontal from './components/sections/TracksHorizontal';
+
+import VideoShowcase from './components/sections/VideoShowcase';
 
 function App() {
   return (
@@ -25,13 +27,14 @@ function App() {
       {/* Main Content with z-index for footer reveal effect */}
       <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl">
         <Hero />
-        <TeamMarquee />
         <AboutSection />
+        <VideoShowcase />
         <AdvantageAccordion />
         <EventsSection />
         <TracksHorizontal />
-        <Mentorship />
-        <ClientsGrid />
+
+        <ImpactMetrics />
+        <ProjectSpotlight />
         <FAQ />
       </main>
 
