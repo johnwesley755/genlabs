@@ -40,7 +40,7 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
   const lenisOptions = {
     lerp: 0.1,
     duration: 1.5,
-    smoothTouch: true,
+    smoothTouch: false, // Use native touch scrolling on mobile for better performance
     autoRaf: false, // We drive it with GSAP ticker
   };
 

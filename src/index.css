@@ -58,6 +58,13 @@
   mix-blend-mode: overlay;
 }
 
+@media (max-width: 768px) {
+  .noise-bg {
+    display: none; /* Disable noise on mobile for performance */
+    animation: none;
+  }
+}
+
 .bg-grid-pattern {
   background-size: 60px 60px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
