@@ -29,20 +29,21 @@ const ImpactMetrics = () => {
 
     return (
         <section ref={sectionRef} className="bg-black text-white py-24 px-4 overflow-hidden">
-            <div className="max-w-[1800px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {impactMetrics.map((metric, index) => (
-                        <div key={index} className="metric-item border-l border-white/20 pl-8 relative group cursor-default">
-                             <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-genGreen scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
+                        <div key={index} className="metric-item relative group cursor-default flex flex-col items-center text-center">
                              <h3 className="text-5xl md:text-7xl font-bold tracking-tighter mb-2 group-hover:text-genGreen transition-colors duration-300">
                                  {metric.value}
                              </h3>
                              <p className="text-sm font-mono text-white/40 uppercase tracking-widest mb-1">
                                  {metric.label}
                              </p>
-                             <p className="text-xs text-white/30">
+                             <p className="text-xs text-white/30 mb-6">
                                  {metric.suffix}
                              </p>
+                             {/* Hover Line */}
+                             <div className="w-12 h-1 bg-genGreen rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
                         </div>
                     ))}
                 </div>

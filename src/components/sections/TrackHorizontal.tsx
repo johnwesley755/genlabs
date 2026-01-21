@@ -65,6 +65,26 @@ const TrackHorizontal = () => {
             }, sectionRef);
         });
 
+        // Mobile Animations
+        mm.add("(max-width: 767px)", () => {
+             ctx = gsap.context(() => {
+                const mobileCards = gsap.utils.toArray('.mobile-track-card');
+                mobileCards.forEach((card: any) => {
+                    gsap.from(card, {
+                        y: 100,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
+             }, sectionRef);
+        });
+
         return () => {
              ctx.revert();
              mm.revert();
@@ -104,7 +124,7 @@ const TrackHorizontal = () => {
                  </div>
                  <div className="space-y-6">
                      {extendedTracks.map((track, i) => (
-                         <div key={i} className="bg-black text-white rounded-[2rem] p-8 relative overflow-hidden group min-h-[50vh] flex flex-col justify-end">
+                         <div key={i} className="mobile-track-card bg-black text-white rounded-[2rem] p-8 relative overflow-hidden group min-h-[50vh] flex flex-col justify-end">
                              {/* Background Image with Overlay */}
                              <div className="absolute inset-0 z-0">
                                  <img 
