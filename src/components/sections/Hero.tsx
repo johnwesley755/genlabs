@@ -1,45 +1,109 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SplitText from '../ui/SplitText';
+import ScrambleText from '../ui/ScrambleText';
 import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Generate random binary streams outside component to avoid impure render calls
+const binaryStream1 = Array.from({ length: 8 }, () => Math.round(Math.random()).toString());
+const binaryStream2 = Array.from({ length: 8 }, () => Math.round(Math.random()).toString());
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const container = containerRef.current;
       const text = textRef.current;
       const shapes = shapesRef.current;
+      const background = backgroundRef.current;
 
-      if (!container || !text || !shapes) return;
+      if (!container || !text || !shapes || !background) return;
 
-      // Mouse Move Parallax
+      // --- Animated Elements Setup ---
+      const floatingShapes = gsap.utils.toArray('.floating-shape') as HTMLElement[];
+      
+      floatingShapes.forEach((shape, i) => {
+        gsap.to(shape, {
+          y: "random(-20, 20)",
+          rotation: "random(-10, 10)",
+          duration: "random(2, 4)",
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2
+        });
+      });
+
+        const rotatingShapes = gsap.utils.toArray('.rotating-shape') as HTMLElement[];
+        rotatingShapes.forEach((shape) => {
+             gsap.to(shape, {
+                  rotation: 360,
+                  duration: "random(20, 40)",
+                  repeat: -1,
+                  ease: "none",
+             });
+        });
+
+        // Pulsing Blobs
+        const blobs = background.querySelectorAll('.blob-shape');
+        blobs.forEach((blob) => {
+            gsap.to(blob, {
+                scale: 1.2,
+                opacity: 0.4,
+                duration: "random(3, 5)",
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            })
+        });
+
+        // Matrix Rain
+        const drops = background.querySelectorAll('.code-drop');
+        drops.forEach((drop) => {
+             gsap.to(drop, {
+                 y: "120vh",
+                 duration: "random(5, 10)",
+                 repeat: -1,
+                 ease: "none",
+                 delay: "random(0, 5)"
+             });
+        });
+
+
+      // --- Parallax Effect ---
       const xSetText = gsap.quickTo(text, "x", { duration: 0.5, ease: "power3" });
       const ySetText = gsap.quickTo(text, "y", { duration: 0.5, ease: "power3" });
       
       const xSetShapes = gsap.quickTo(shapes, "x", { duration: 0.5, ease: "power3" });
       const ySetShapes = gsap.quickTo(shapes, "y", { duration: 0.5, ease: "power3" });
 
+      const xSetBg = gsap.quickTo(background.querySelectorAll('.parallax-bg'), "x", { duration: 0.8, ease: "power3" });
+      const ySetBg = gsap.quickTo(background.querySelectorAll('.parallax-bg'), "y", { duration: 0.8, ease: "power3" });
+
+
       const handleMouseMove = (e: MouseEvent) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
         const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
-        xSetText(-20 * x); // Text moves away
+        xSetText(-20 * x); 
         ySetText(-20 * y);
 
-        xSetShapes(50 * x); // Shapes move towards
+        xSetShapes(50 * x); 
         ySetShapes(50 * y);
+        
+        xSetBg(-30 * x);
+        ySetBg(-30 * y);
       };
 
       window.addEventListener('mousemove', handleMouseMove);
 
-      // Scroll Animation - Text Sinks, Shapes Explode
+      // --- Scroll Animation ---
       gsap.to(text, {
         scrollTrigger: {
           trigger: container,
@@ -74,18 +138,62 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="h-screen flex flex-col items-center justify-center relative overflow-hidden bg-genMain">
+    <section ref={containerRef} className="h-screen flex flex-col items-center justify-center relative overflow-hidden bg-genMain text-genText">
       
-      {/* Optimized Background - Cinematic Lighting */}
-      <div className="absolute inset-0 z-0 bg-genMain pointer-events-none">
-          {/* Top Spotlight */}
-          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[80%] rounded-full bg-genGreen/20 blur-[120px]" />
-          {/* Bottom Accent */}
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[100px]" />
-          {/* Noise Texture */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 brightness-100 contrast-150 mix-blend-overlay" />
+      {/* --- BACKGROUND LAYER (Z-0) --- */}
+      <div ref={backgroundRef} className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.4]" />
+          
+          {/* Main Blobs - Now Pulsing */}
+          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full bg-genGreen/20 blur-[100px] parallax-bg blob-shape" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] md:w-[30vw] md:h-[30vw] rounded-full bg-blue-500/10 blur-[80px] parallax-bg blob-shape" />
+          <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] md:w-[20vw] md:h-[20vw] rounded-full bg-purple-500/10 blur-[60px] parallax-bg blob-shape" />
+
+          {/* Matrix Code Rain */}
+          <div className="absolute top-[-10%] left-[15%] text-xs font-mono text-black/5 code-drop flex flex-col gap-1">
+              {binaryStream1.map((c, i) => <div key={i}>{c}</div>)}
+          </div>
+          <div className="absolute top-[-20%] right-[25%] text-xs font-mono text-genGreen/10 code-drop flex flex-col gap-1">
+              {"GITHUB REPO".split('').map((c, i) => <div key={i}>{c}</div>)}
+          </div>
+           <div className="absolute top-[-15%] left-[80%] text-xs font-mono text-black/5 code-drop flex flex-col gap-1">
+               {binaryStream2.map((c, i) => <div key={i}>{c}</div>)}
+           </div>
+
+
+          {/* Geometric Shapes */}
+          <svg className="absolute top-[15%] left-[10%] w-24 h-24 text-black/5 floating-shape rotating-shape" viewBox="0 0 100 100">
+              <rect x="20" y="20" width="60" height="60" stroke="currentColor" strokeWidth="2" fill="none" />
+          </svg>
+          
+          <svg className="absolute bottom-[20%] left-[20%] w-16 h-16 text-genGreen/40 floating-shape" viewBox="0 0 100 100">
+               <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="2" fill="none" />
+          </svg>
+
+          <svg className="absolute top-[30%] right-[15%] w-32 h-32 text-black/5 floating-shape rotating-shape" viewBox="0 0 100 100">
+              <polygon points="50,15 90,85 10,85" stroke="currentColor" strokeWidth="2" fill="none" />
+          </svg>
+
+           {/* Decorative Plus Signs */}
+           <div className="absolute top-[10%] right-[30%] text-black/10 text-4xl font-mono floating-shape">+</div>
+           <div className="absolute bottom-[30%] left-[5%] text-black/10 text-6xl font-mono floating-shape">+</div>
+           <div className="absolute top-[50%] right-[5%] text-black/10 text-2xl font-mono floating-shape">+</div>
+
+          {/* Decorative Back Text */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center overflow-hidden opacity-[0.03] select-none scale-[1.5]">
+               <h1 className="text-[20vw] font-bold leading-none tracking-tighter uppercase whitespace-nowrap parallax-bg">
+                   BUILD THE FUTURE
+               </h1>
+          </div>
+          
+           {/* Noise Overlay */}
+           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 brightness-100 contrast-150 mix-blend-overlay" />
       </div>
 
+
+      {/* --- CONTENT LAYER (Z-30) --- */}
       <div ref={textRef} className="relative z-30 text-center flex flex-col items-center px-4 w-full max-w-[90vw]">
          <div className="mb-8 flex items-center gap-4 animate-fade-in-up delay-100">
              <span className="px-6 py-2 rounded-full border border-black/5 bg-white/40 backdrop-blur-lg text-sm font-mono uppercase tracking-[0.2em] shadow-sm">
@@ -94,9 +202,9 @@ const Hero = () => {
          </div>
          
          <div className="relative">
-             <SplitText className="text-black text-[15vw] md:text-[14vw] font-bold tracking-tighter leading-[0.8] mix-blend-hard-light select-none">
-                GENLAB
-             </SplitText>
+             <div className="text-black text-[15vw] md:text-[14vw] font-bold tracking-tighter leading-[0.8] mix-blend-hard-light select-none">
+                <ScrambleText text="GENLAB" />
+             </div>
              {/* Decorative Stroke Effect */}
              <h1 className="absolute inset-0 text-[15vw] md:text-[14vw] font-bold tracking-tighter leading-[0.8] text-transparent stroke-text select-none opacity-20 pointer-events-none">
                  GENLAB
@@ -118,11 +226,11 @@ const Hero = () => {
          </button>
       </div>
 
-      {/* Floating Elements - Glassmorphism UI Cards */}
-      <div ref={shapesRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0 block">
+       {/* --- FLOATING CARDS LAYER (Z-20) --- */}
+      <div ref={shapesRef} className="absolute inset-0 pointer-events-none overflow-hidden z-20 block">
           
-          {/* Top Right - Mentor Card - Now Visible on Mobile (Diagonal Layout) */}
-          <div className="absolute top-[12%] -right-[15%] scale-[0.45] md:top-[25%] md:right-[15%] md:scale-100 w-72 p-6 bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] border border-white/50 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float z-10">
+          {/* Top Right - Mentor Card */}
+          <div className="absolute top-[12%] -right-[15%] scale-[0.45] md:top-[25%] md:right-[15%] md:scale-100 w-72 p-6 bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] border border-white/50 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float">
                <div className="flex gap-4 items-center mb-4">
                    <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden ring-2 ring-genGreen/50 p-0.5">
                        <img src="https://randomuser.me/api/portraits/women/44.jpg" className="w-full h-full object-cover rounded-full"/>
@@ -139,52 +247,52 @@ const Hero = () => {
           </div>
 
           {/* Bottom Left - Live Session */}
-          <div className="absolute bottom-[-5%] -left-[15%] scale-[0.45] md:bottom-[15%] md:left-[10%] md:scale-100 w-80 bg-black/90 text-white p-1 rounded-[2rem] shadow-2xl -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 origin-center animate-float-delayed z-20">
+          <div className="absolute bottom-[-5%] -left-[15%] scale-[0.45] md:bottom-[15%] md:left-[10%] md:scale-100 w-80 bg-black/90 text-white p-1 rounded-[2rem] shadow-2xl -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 origin-center animate-float-delayed">
                <div className="relative h-48 rounded-[1.7rem] overflow-hidden mb-4">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover" />
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-red-500/90 backdrop-blur-sm rounded-full flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                        <span className="text-[10px] font-bold tracking-wider">LIVE</span>
+                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover" />
+                     <div className="absolute top-4 left-4 px-3 py-1 bg-red-500/90 backdrop-blur-sm rounded-full flex items-center gap-2">
+                         <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                         <span className="text-[10px] font-bold tracking-wider">LIVE</span>
+                     </div>
+                </div>
+                <div className="px-5 pb-6">
+                    <p className="text-xs text-white/50 font-mono mb-2">UPCOMING_EVENT</p>
+                    <p className="text-lg font-bold leading-tight mb-4">AI Design Systems: From Concept to Code</p>
+                    <div className="flex -space-x-2">
+                        {[1,2,3].map(i => (
+                            <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800" />
+                        ))}
+                        <div className="w-8 h-8 rounded-full border-2 border-black bg-genGreen flex items-center justify-center text-black text-[10px] font-bold">
+                            +42
+                        </div>
                     </div>
-               </div>
-               <div className="px-5 pb-6">
-                   <p className="text-xs text-white/50 font-mono mb-2">UPCOMING_EVENT</p>
-                   <p className="text-lg font-bold leading-tight mb-4">AI Design Systems: From Concept to Code</p>
-                   <div className="flex -space-x-2">
-                       {[1,2,3].map(i => (
-                           <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800" />
-                       ))}
-                       <div className="w-8 h-8 rounded-full border-2 border-black bg-genGreen flex items-center justify-center text-black text-[10px] font-bold">
-                           +42
-                       </div>
-                   </div>
-               </div>
-          </div>
+                </div>
+           </div>
 
-          {/* Bottom Right - New Card - Hidden on Mobile to reduce clutter */}
-          <div className="hidden md:block absolute bottom-[15%] right-[5%] scale-100 w-64 p-6 bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/60 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float z-10">
-               <div className="mb-4 flex justify-between items-start">
-                   <div>
-                       <p className="text-[10px] font-mono uppercase text-black/50 mb-1">WEEKLY_GROWTH</p>
-                       <p className="text-3xl font-bold text-black">+127%</p>
-                   </div>
-                   <div className="w-8 h-8 rounded-full bg-genGreen flex items-center justify-center">
-                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                           <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                           <polyline points="17 6 23 6 23 12"></polyline>
-                       </svg>
-                   </div>
-               </div>
-               <div className="h-16 flex items-end gap-1 mb-2">
-                   {[40, 70, 45, 90, 60, 80, 100].map((h, i) => (
-                       <div key={i} style={{ height: `${h}%` }} className="flex-1 bg-black/10 rounded-sm hover:bg-genGreen transition-colors duration-300" />
-                   ))}
-               </div>
-               <p className="text-xs text-black/60 font-medium">New creators joined this week</p>
-          </div>
-      </div>
-    </section>
-  );
-};
-
-export default Hero;
+           {/* Bottom Right - New Card */}
+           <div className="hidden md:block absolute bottom-[15%] right-[5%] scale-100 w-64 p-6 bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/60 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float">
+                <div className="mb-4 flex justify-between items-start">
+                    <div>
+                        <p className="text-[10px] font-mono uppercase text-black/50 mb-1">WEEKLY_GROWTH</p>
+                        <p className="text-3xl font-bold text-black">+127%</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-genGreen flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div className="h-16 flex items-end gap-1 mb-2">
+                    {[40, 70, 45, 90, 60, 80, 100].map((h, i) => (
+                        <div key={i} style={{ height: `${h}%` }} className="flex-1 bg-black/10 rounded-sm hover:bg-genGreen transition-colors duration-300" />
+                    ))}
+                </div>
+                <p className="text-xs text-black/60 font-medium">New creators joined this week</p>
+           </div>
+       </div>
+     </section>
+   );
+ };
+ 
+ export default Hero;
