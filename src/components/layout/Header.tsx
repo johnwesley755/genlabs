@@ -18,9 +18,7 @@ const Header = () => {
     const scrollToSection = (id: string) => {
         const element = document.querySelector(`#${id}`) as HTMLElement;
         if (element) {
-            import('@studio-freight/react-lenis').then(module => {
-                // Determine offset based on layout (optional)
-                 const offset = 0;
+            import('@studio-freight/react-lenis').then(() => {
                  // Native scrollIntoView as fallback or use lenis instance if accessible
                  element.scrollIntoView({ behavior: 'smooth' });
             });

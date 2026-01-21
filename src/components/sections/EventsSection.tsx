@@ -43,35 +43,60 @@ const EventsSection = () => {
                          {events.map((event, index) => (
                              <div 
                                 key={event.id}
-                                onMouseEnter={() => setActiveIndex(index)}
+                                 onClick={() => setActiveIndex(index)}
                                 className={twMerge(
-                                    "group relative border-t border-white/10 py-8 md:py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer hover:bg-white/5 transition-all duration-300",
+                                    "group relative border-t border-white/10 py-8 md:py-10 flex flex-col cursor-pointer hover:bg-white/5 transition-all duration-300",
                                     activeIndex === index ? "border-white/40 bg-white/5" : ""
                                 )}
                              >
-                                 {/* Date & Category */}
-                                 <div className="flex items-start md:items-center gap-8 md:w-2/3">
-                                     <div className={twMerge("text-xs md:text-sm uppercase tracking-widest min-w-[80px] font-mono", activeIndex === index ? "text-genGreen" : "text-white/40")}>
-                                         {event.date}
+                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 w-full px-4 md:px-0">
+                                     {/* Date & Category */}
+                                     <div className="flex items-start md:items-center gap-8 md:w-2/3">
+                                         <div className={twMerge("text-xs md:text-sm uppercase tracking-widest min-w-[80px] font-mono", activeIndex === index ? "text-genGreen" : "text-white/40")}>
+                                             {event.date}
+                                         </div>
+                                         <div>
+                                             <h3 className="text-2xl md:text-4xl font-bold tracking-tight group-hover:translate-x-4 transition-transform duration-300 mb-2">
+                                                 {event.title}
+                                             </h3>
+                                              <div className="flex items-center gap-3 text-sm text-white/50">
+                                                 <span className="bg-white/10 px-2 py-0.5 rounded textxs font-mono">{event.category}</span>
+                                                 <span>{event.location}</span>
+                                              </div>
+                                         </div>
                                      </div>
-                                     <div>
-                                         <h3 className="text-2xl md:text-4xl font-bold tracking-tight group-hover:translate-x-4 transition-transform duration-300 mb-2">
-                                             {event.title}
-                                         </h3>
-                                          <div className="flex items-center gap-3 text-sm text-white/50">
-                                             <span className="bg-white/10 px-2 py-0.5 rounded textxs font-mono">{event.category}</span>
-                                             <span>{event.location}</span>
-                                          </div>
+
+                                     {/* Action */}
+                                     <div className="flex items-center justify-between md:justify-end md:w-1/3">
+                                         <div className={twMerge(
+                                             "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 transform group-hover:rotate-45",
+                                             activeIndex === index ? "bg-genGreen text-black border-genGreen scale-110" : "border-white/20 text-white"
+                                         )}>
+                                             <ArrowUpRight className="w-5 h-5" />
+                                         </div>
                                      </div>
                                  </div>
 
-                                 {/* Action */}
-                                 <div className="flex items-center justify-between md:justify-end md:w-1/3">
-                                     <div className={twMerge(
-                                         "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 transform group-hover:rotate-45",
-                                         activeIndex === index ? "bg-genGreen text-black border-genGreen scale-110" : "border-white/20 text-white"
-                                     )}>
-                                         <ArrowUpRight className="w-5 h-5" />
+                                 {/* Mobile Detail Panel (Accordion Style) */}
+                                 <div className={twMerge(
+                                     "grid transition-all duration-500 ease-in-out lg:hidden overflow-hidden",
+                                     activeIndex === index ? "grid-rows-[1fr] opacity-100 mt-8" : "grid-rows-[0fr] opacity-0"
+                                 )}>
+                                     <div className="overflow-hidden">
+                                        <div className="bg-white/5 rounded-2xl p-6 mx-4 md:mx-0 border border-white/10">
+                                            {/* Mobile Timer */}
+                                            <div className="flex items-center gap-2 mb-6 text-white/40 text-[10px] font-mono uppercase">
+                                                <Clock className="w-3 h-3" /> Starts In: <span className="text-white">04:12:38</span>
+                                            </div>
+                                            
+                                            <p className="text-white/60 text-sm leading-relaxed mb-6">
+                                                {event.description}
+                                            </p>
+
+                                            <button className="w-full py-3 bg-white text-black rounded-full font-bold uppercase tracking-widest text-sm hover:bg-genGreen transition-colors duration-300">
+                                                Register_Now
+                                            </button>
+                                        </div>
                                      </div>
                                  </div>
                              </div>

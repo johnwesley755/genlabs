@@ -230,7 +230,7 @@ const Hero = () => {
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none overflow-hidden z-20 block">
           
           {/* Top Right - Mentor Card */}
-          <div className="absolute top-[12%] -right-[15%] scale-[0.45] md:top-[25%] md:right-[15%] md:scale-100 w-72 p-6 bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] border border-white/50 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float">
+          <div className="absolute top-[8%] -right-[20%] scale-[0.35] md:top-[25%] md:right-[15%] md:scale-100 w-72 p-6 bg-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] border border-white/50 rotate-6 transition-transform duration-500 origin-center hover:rotate-0 hover:scale-110 animate-float">
                <div className="flex gap-4 items-center mb-4">
                    <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden ring-2 ring-genGreen/50 p-0.5">
                        <img src="https://randomuser.me/api/portraits/women/44.jpg" className="w-full h-full object-cover rounded-full"/>
@@ -247,7 +247,7 @@ const Hero = () => {
           </div>
 
           {/* Bottom Left - Live Session */}
-          <div className="absolute bottom-[-5%] -left-[15%] scale-[0.45] md:bottom-[15%] md:left-[10%] md:scale-100 w-80 bg-black/90 text-white p-1 rounded-[2rem] shadow-2xl -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 origin-center animate-float-delayed">
+          <div className="absolute bottom-[5%] -left-[20%] scale-[0.35] md:bottom-[15%] md:left-[10%] md:scale-100 w-80 bg-black/90 text-white p-1 rounded-[2rem] shadow-2xl -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 origin-center animate-float-delayed">
                <div className="relative h-48 rounded-[1.7rem] overflow-hidden mb-4">
                      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover" />
                      <div className="absolute top-4 left-4 px-3 py-1 bg-red-500/90 backdrop-blur-sm rounded-full flex items-center gap-2">

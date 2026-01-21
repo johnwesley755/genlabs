@@ -65,26 +65,26 @@ const StackingCards = () => {
           <div
             key={card.id}
             ref={(el) => { cardsRef.current[index] = el/*; */}}
-            className={`sticky top-24 md:top-32 w-full max-w-[95vw] h-[75vh] md:h-[80vh] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-black/5 origin-top transition-all duration-500 ${card.color}`}
+            className={`sticky top-24 md:top-32 w-full max-w-[95vw] h-[85vh] md:h-[80vh] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-black/5 origin-top transition-all duration-500 ${card.color}`}
           >
             <div className="grid md:grid-cols-2 h-full">
                 
                 {/* Content Side */}
-                <div className={`p-8 md:p-16 flex flex-col justify-between h-full order-2 ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
+                <div className={`p-6 md:p-16 flex flex-col justify-between h-full order-2 ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'} overflow-y-auto`}>
                     <div>
-                        <div className="flex justify-between items-center mb-8">
+                        <div className="flex justify-between items-center mb-6 md:mb-8">
                              <span className="text-xl font-mono opacity-60">Phase {card.num}</span>
                              <div className="p-3 rounded-full border border-current opacity-30">
                                 <ArrowUpRight className="w-6 h-6" />
                              </div>
                         </div>
-                        <h3 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">{card.title}</h3>
-                        <p className="text-lg md:text-2xl opacity-80 leading-relaxed">{card.description}</p>
+                        <h3 className="text-3xl md:text-6xl font-bold tracking-tighter mb-4 md:mb-6">{card.title}</h3>
+                        <p className="text-base md:text-2xl opacity-80 leading-relaxed">{card.description}</p>
                     </div>
 
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 md:gap-3 mt-6 md:mt-0">
                         {card.tags.map(tag => (
-                            <span key={tag} className="px-4 py-2 rounded-full border border-current opacity-60 text-sm font-mono uppercase tracking-wider">
+                            <span key={tag} className="px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-current opacity-60 text-xs md:text-sm font-mono uppercase tracking-wider">
                                 {tag}
                             </span>
                         ))}
@@ -92,7 +92,7 @@ const StackingCards = () => {
                 </div>
 
                 {/* Image Side */}
-                <div className={`relative h-[40vh] md:h-full order-1 ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
+                <div className={`relative h-[25vh] md:h-full order-1 ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
                     <img 
                         src={card.image} 
                         alt={card.title} 
