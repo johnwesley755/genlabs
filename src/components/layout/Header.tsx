@@ -15,7 +15,7 @@ const Header = () => {
     });
 
     const scrollToSection = (id: string) => {
-        const element = document.querySelector(`#${id}`);
+        const element = document.querySelector(`#${id}`) as HTMLElement;
         if (element && lenis) {
             lenis.scrollTo(element);
         }

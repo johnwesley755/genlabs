@@ -221,6 +221,52 @@ export const footerContent = {
         { title: "Company", items: ["About", "Careers", "Blog", "Press"] },
         { title: "Legal", items: ["Privacy", "Terms", "Cookie Policy"] },
     ],
-    socials: ["Twitter", "LinkedIn", "Instagram", "GitHub"]
+    socials: [
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/genlabz/" },
+        { label: "Instagram", href: "https://www.instagram.com/genlab.cc/" }
+    ]
+};
+
+export const stackingCards = {
+    title: "The Blueprint",
+    subtitle: "From abstract concept to concrete reality. A systematic approach to digital excellence.",
+    cards: [
+        {
+            id: 1,
+            title: "Discover Vision",
+            description: "We don't just build; we understand. We dive deep into your brand's DNA to uncover the unique value proposition that will resonate with your community.",
+            image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop",
+            tags: ["Strategy", "User Research", "Market Analysis"],
+            color: "bg-[#111] text-white",
+            num: "01"
+        },
+        {
+            id: 2,
+            title: "Define Structure",
+            description: "Chaos into order. We map out the user journey, defining key touchpoints and architectural logic to ensure a seamless and intuitive experience.",
+            image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2074&auto=format&fit=crop",
+            tags: ["Architecture", "Wireframing", "Scope"],
+            color: "bg-[#F0F0F0] text-black",
+            num: "02"
+        },
+        {
+            id: 3,
+            title: "Craft & Design",
+            description: "Visuals that captivate. We push pixels to perfection, creating a high-fidelity aesthetic that feels premium, tactile, and distinctly yours.",
+            image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop",
+            tags: ["UI / UX", "Motion", "Branding"],
+            color: "bg-genGreen text-black",
+            num: "03"
+        },
+        {
+            id: 4,
+            title: "Develop & Scale",
+            description: "Code that performs. We build with modern frameworks to ensure your platform is fast, responsive, and ready to scale with your growth.",
+            image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+            tags: ["Development", "Integration", "QA Testing"],
+            color: "bg-black text-white",
+            num: "04"
+        }
+    ]
 };
 

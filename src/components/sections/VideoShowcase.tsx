@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import video1 from '../../assets/video1.mp4';
 gsap.registerPlugin(ScrollTrigger);
 
 const VideoShowcase = () => {
@@ -44,7 +44,7 @@ const VideoShowcase = () => {
                     playsInline 
                     className="w-full h-full object-cover"
                  >
-                    <source src="/video.mp4" type="video/mp4" />
+                    <source src={video1} type="video/mp4" />
                  </video>
                  <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
             </div>

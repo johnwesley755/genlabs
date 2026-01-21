@@ -1,6 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
+import { footerContent } from '../../data/content';
 
 const Footer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,9 +57,15 @@ const Footer = () => {
             </ul>
         </div>
         <div className="flex gap-4 flex-wrap">
-            {['INSTAGRAM', 'TWITTER', 'LINKEDIN'].map(social => (
-                <a key={social} href="#" className="magnetic-btn px-6 py-3 rounded-full border border-white/20 font-mono text-xs hover:bg-white hover:text-black transition-colors">
-                    {social}
+            {footerContent.socials.map((social, i) => (
+                <a 
+                    key={i} 
+                    href={social.href}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="magnetic-btn px-6 py-3 rounded-full border border-white/20 font-mono text-xs hover:bg-white hover:text-black transition-colors"
+                >
+                    {social.label}
                 </a>
             ))}
         </div>

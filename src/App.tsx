@@ -11,7 +11,7 @@ import Footer from './components/layout/Footer';
 import AdvantageAccordion from './components/sections/AdvantageAccordion';
 import TracksHorizontal from './components/sections/TrackHorizontal';
 
-import VideoShowcase from './components/sections/VideoShowcase';
+import StackingCards from './components/sections/StackingCards';
 import Manifesto from './components/sections/Manifesto';
 import CommunityGallery from './components/sections/CommunityGallery';
 
@@ -29,13 +29,12 @@ function App() {
       <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl w-full">
         <Hero />
         <AboutSection />
-        <VideoShowcase />
+        <StackingCards />
         <Manifesto />
         <AdvantageAccordion />
         <EventsSection />
         <CommunityGallery />
         <TracksHorizontal />
-
         <ImpactMetrics />
         <ProjectSpotlight />
         <FAQ />

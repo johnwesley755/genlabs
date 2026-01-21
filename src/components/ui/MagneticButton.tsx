@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, ReactNode } from 'react';
+import { useRef, useEffect, type ReactNode } from 'react';
 import gsap from 'gsap';
 
 interface MagneticButtonProps {
@@ -13,7 +13,6 @@ const MagneticButton = ({
     children, 
     className = "", 
     strength = 0.5, 
-    scaleOnHover = 1.1,
     onClick 
 }: MagneticButtonProps) => {
     const buttonRef = useRef<HTMLDivElement>(null);

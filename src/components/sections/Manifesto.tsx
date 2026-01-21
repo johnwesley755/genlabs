@@ -13,6 +13,8 @@ const Manifesto = () => {
         const ctx = gsap.context(() => {
             
             const words = textRef.current?.querySelectorAll('.word');
+
+            if (!words) return;
             
             gsap.fromTo(words, 
                 { opacity: 0.2, y: 50 },

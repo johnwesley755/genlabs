@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, type ReactNode } from 'react';
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 interface SmoothScrollProviderProps {
-  children: any;
+  children: ReactNode;
 }
 
 const LenisUpdater = () => {
@@ -45,7 +45,6 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
   };
 
   return (
-    // @ts-ignore
     <ReactLenis root options={lenisOptions}>
       <LenisUpdater />
       {children}

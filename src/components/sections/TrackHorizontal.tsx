@@ -68,8 +68,8 @@ const TrackHorizontal = () => {
         // Mobile Animations
         mm.add("(max-width: 767px)", () => {
              ctx = gsap.context(() => {
-                const mobileCards = gsap.utils.toArray('.mobile-track-card');
-                mobileCards.forEach((card: any) => {
+                const mobileCards = gsap.utils.toArray('.mobile-track-card') as HTMLElement[];
+                mobileCards.forEach((card: HTMLElement) => {
                     gsap.from(card, {
                         y: 100,
                         opacity: 0,
