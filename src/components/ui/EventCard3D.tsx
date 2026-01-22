@@ -1,4 +1,4 @@
-import { useRef, MouseEvent } from 'react';
+import { useRef, type MouseEvent } from 'react';
 import gsap from 'gsap';
 import { twMerge } from 'tailwind-merge';
 

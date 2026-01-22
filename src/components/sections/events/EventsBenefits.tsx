@@ -34,8 +34,6 @@ const benefits = [
 
 const EventsBenefits = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const revealRef = useRef<HTMLDivElement>(null);
-
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             

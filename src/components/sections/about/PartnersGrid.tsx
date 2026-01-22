@@ -56,7 +56,13 @@ const PartnersGrid = () => {
     const col2 = [aboutPageContent.partners[1], aboutPageContent.partners[4], aboutPageContent.partners[7]].filter(Boolean);
     const col3 = [aboutPageContent.partners[2], aboutPageContent.partners[5]].filter(Boolean);
 
-    const renderCard = (partner: any, idx: number) => (
+    interface Partner {
+        name: string;
+        description: string;
+        logo: string;
+    }
+
+    const renderCard = (partner: Partner, idx: number) => (
         <div key={idx} className="w-full aspect-[3/4] md:aspect-[4/5] bg-white/5 rounded-3xl overflow-hidden relative group border border-white/10 hover:border-genGreen/50 transition-colors duration-500 mb-8 md:mb-12">
             <div className="absolute inset-0">
                 <img 

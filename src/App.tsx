@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
 import SmoothScrollProvider from './components/providers/SmoothScrollProvider';
 import CustomCursor from './components/ui/CustomCursor';
-import Preloader from './components/ui/Preloader';
+
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 
@@ -14,7 +14,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 function App() {
   return (
     <Router>
-        <Preloader />
+
         <SmoothScrollProvider>
         <CustomCursor />
         <ScrollToTop />

@@ -29,7 +29,8 @@ const FounderSpotlight = () => {
 
             // Unique Text Reveal - "Skew Up"
             const textElements = gsap.utils.toArray('.reveal-text');
-            textElements.forEach((el: any) => {
+            textElements.forEach((el: unknown) => {
+                if (el instanceof HTMLElement) {
                 gsap.fromTo(el, 
                     { y: 100, skewY: 10, opacity: 0 },
                     { 
@@ -45,6 +46,7 @@ const FounderSpotlight = () => {
                         }
                     }
                 );
+                }
             });
 
             // Decorative Circle functionality

@@ -11,7 +11,7 @@ const CoreValues = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            cardsRef.current.forEach((card, i) => {
+            cardsRef.current.forEach((card) => {
                 if (!card) return;
                 
                 ScrollTrigger.create({

@@ -15,6 +15,14 @@ const PresenceMap = () => {
 
     const { presence } = aboutPageContent;
 
+    interface PresenceLocation {
+        city: string;
+        address: string;
+        mapLink: string;
+        image: string;
+        color: string;
+    }
+
     return (
         // FIX 1: Changed pt-0 to py-16/py-24 for balanced top and bottom spacing
         <section ref={containerRef} className="py-16 md:py-24 lg:py-32 bg-white text-black">
@@ -31,7 +39,7 @@ const PresenceMap = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-                    {presence.map((loc: any, index: number) => (
+                    {presence.map((loc: PresenceLocation, index: number) => (
                         <a 
                             key={index}
                             href={loc.mapLink}
