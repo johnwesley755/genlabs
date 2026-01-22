@@ -2,7 +2,7 @@ import { useRef, useState, useLayoutEffect } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projects } from '../../data/content';
+import { projects } from '../../../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 

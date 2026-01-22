@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowUpRight, Clock } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
-import { events } from '../../data/content';
+import { events } from '../../../data/content';
 
 const EventsSection = () => {
     const [activeIndex, setActiveIndex] = useState(0);

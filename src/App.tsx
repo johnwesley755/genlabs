@@ -1,50 +1,44 @@
+import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
 import SmoothScrollProvider from './components/providers/SmoothScrollProvider';
 import CustomCursor from './components/ui/CustomCursor';
-import Hero from './components/sections/Hero';
-import AboutSection from './components/sections/AboutSection';
-import EventsSection from './components/sections/EventsSection';
-import ImpactMetrics from './components/sections/ImpactMetrics';
-import ProjectSpotlight from './components/sections/ProjectSpotlight';
-import FAQ from './components/sections/FAQ';
+import Preloader from './components/ui/Preloader';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import AdvantageAccordion from './components/sections/AdvantageAccordion';
-import TracksHorizontal from './components/sections/TrackHorizontal';
 
-import StackingCards from './components/sections/StackingCards';
-import Manifesto from './components/sections/Manifesto';
-import CommunityGallery from './components/sections/CommunityGallery';
+// Pages
+import Home from './pages/Home';
+import About from './pages/About';
+import Events from './pages/Events';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
   return (
-    <SmoothScrollProvider>
-      <CustomCursor />
-      
-      {/* Noise Overlay - Restored for texture */}
-      <div className="noise-bg fixed inset-0 z-50 pointer-events-none opacity-30 mix-blend-multiply"></div>
+    <Router>
+        <Preloader />
+        <SmoothScrollProvider>
+        <CustomCursor />
+        <ScrollToTop />
+        
+        {/* Noise Overlay - Restored for texture */}
+        <div className="noise-bg fixed inset-0 z-50 pointer-events-none opacity-30 mix-blend-multiply"></div>
 
-      <Header />
-      
-      {/* Main Content with z-index for footer reveal effect */}
-      <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl w-full">
-        <Hero />
-        <AboutSection />
-        <StackingCards />
-        <Manifesto />
-        <AdvantageAccordion />
-        <EventsSection />
-        <CommunityGallery />
-        <TracksHorizontal />
-        <ImpactMetrics />
-        <ProjectSpotlight />
-        <FAQ />
-      </main>
+        <Header />
+        
+        {/* Main Content with z-index for footer reveal effect */}
+        <main className="bg-genMain min-h-screen relative z-10 mb-[80vh] shadow-2xl w-full">
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/events" element={<Events />} />
+            </Routes>
+        </main>
 
-      {/* Sticky Reveal Footer */}
-      <div className="fixed bottom-0 left-0 w-full h-[80vh] z-0">
-          <Footer />
-      </div>
-    </SmoothScrollProvider>
+        {/* Sticky Reveal Footer */}
+        <div className="fixed bottom-0 left-0 w-full h-[80vh] z-0">
+            <Footer />
+        </div>
+        </SmoothScrollProvider>
+    </Router>
   );
 }
 

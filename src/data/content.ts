@@ -270,3 +270,188 @@ export const stackingCards = {
     ]
 };
 
+
+// ABOUT PAGE CONTENT
+export const aboutPageContent = {
+    hero: {
+        title: "Our Story",
+        subtitle: "Every meaningful journey begins with a simple question.",
+        description: "GenLab IB was founded with a bold vision—to build India's largest AI-driven GenZ community and redefine the future of tech talent. With a presence in Hyderabad, Bengaluru, and Nagercoil, we are on a mission to unite 1% of India's GenZ and create 1,000+ jobs every year in tech. From skill-building to career acceleration, we empower students, job seekers, and professionals to level up with Soft skill, AI and emerging technologies. Our purpose fuels our passion, and together, we're shaping the next generation of changemakers!"
+    },
+    stats: [
+        { value: "4+", label: "Cities in operation" },
+        { value: "5+", label: "Years of impact" },
+        { value: "8K+", label: "Lives transformed" },
+        { value: "10+", label: "Partnerships" }
+    ],
+    values: [
+        {
+            id: "01",
+            title: "Impact-Driven Growth",
+            description: "We don't just upskill; we unlock real-world pathways that drive success.",
+            image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop"
+        },
+        {
+            id: "02",
+            title: "Community-Centric Approach",
+            description: "Collaboration is at our core. We grow together, learn together, and build together.",
+            image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop"
+        },
+        {
+            id: "03",
+            title: "Future-Ready Mindset",
+            description: "We prepare GenZ for the evolving digital landscape with cutting-edge skills and hands-on experience.",
+            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop"
+        }
+    ],
+    partners: [
+        {
+            name: "BVVS's Institute of Management Studies",
+            location: "Bagalkot, Karnataka",
+            description: "Conducted 'Cracking the Job Code' workshop for management students, offering career guidance and interview techniques.",
+            logo: "https://www.bimsbagalkot.ac.in/images/bims_bagalkot_cover_5.JPG" // Placeholder
+        },
+        {
+            name: "Siddaganga Institute of Technology",
+            location: "Tumkur, Karnataka",
+            description: "Hosted a Workshop, empowering students with leadership strategies and industry-focused training.",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/3/31/Siddaganga_institute_of_technology.jpg" // Placeholder
+        },
+        {
+            name: "Coimbatore International Airport",
+            location: "Coimbatore, Tamil Nadu",
+            description: "Worked designing digital content, branding visuals, and promotional materials to enhance international outreach.",
+            logo: "https://www.aai.aero/sites/default/files/Airport%20Images/banner3_3.jpg" // Placeholder
+        },
+        {
+            name: "Vellore Institute of Technology",
+            location: "Vellore, Tamil Nadu",
+            description: "Partnered with Pixels and Paths: Navigating UI/UX and App Trivia, delivering hands-on Design Thinking training.",
+            logo: "https://viteee.vit.ac.in/sdcassets/img/vellore_campus.jpg" // Placeholder
+        },
+        {
+            name: "Arunachala Arts and Science College",
+            location: "Nagercoil, Tamil Nadu",
+            description: "Implemented internship and training programs covering tech and non-tech IT domains.",
+            logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfAx0nVXqwul5UTgOsbN12-A-uCoialwgOyQ&s" // Placeholder
+        },
+        {
+            name: "SNS Institutions",
+            location: "Coimbatore, Tamil Nadu",
+            description: "Facilitated a UI/UX & Design Thinking workshop, empowering students to craft impactful digital experiences.",
+            logo: "https://cdn.bitrix24.com/b11752903/landing/896/896468f542a71ecbd9569d1ead65a086/snsce_1x.jpeg" // Placeholder
+        },
+        {
+            name: "Central Board of Secondary Education",
+            location: "New Delhi, India",
+            description: "Collaborated on magazine projects, contributing to enhances student engagement and academic storytelling.",
+            logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvhOIYkqHuPI04p_Fbg-unTXMa7v_BQQriQ&s" // Placeholder
+        }
+    ],
+    founder: {
+        name: "Mr. Henrich",
+        role: "Founder",
+        description: "A design entrepreneur with a well of experience, Henrich P. has been shaping the future of AI, product design, and business strategy. His expertise in crafting seamless user experiences, scaling tech-driven solutions, and mentoring young talent has empowered countless professionals.",
+        image: "https://www.genlabib.in/assets/images/hend.png" // Placeholder
+    },
+    presence: [
+        {
+            city: "Hyderabad",
+            address: "1st Floor, Pl No - 31, Bruvandan Colony, Gandipet, Hyderabad, Telangana 500075",
+            mapLink: "https://www.google.com/maps/place/Kokapet+One/@17.3854002,78.3277455,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb952dab1f340f:0x3acf9cd4c8299cdb!8m2!3d17.3854002!4d78.3303204!16s%2Fg%2F11hzt9zsz7?entry=ttu&g_ep=EgoyMDI2MDExOS4wIKXMDSoASAFQAw%3D%3D",
+            image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/98/f7/df/charminar.jpg?w=600&h=500&s=1",
+            color: "group-hover:shadow-purple-500/50"
+        },
+        {
+            city: "Nagercoil",
+            address: "No. 130, First Floor, Watertank Road, Nagercoil, Tamil Nadu 629001",
+            mapLink: "https://www.google.com/maps/dir/8.1854464,77.4340608/GenLab,+121%2FC,+Kottar-Parvathipuram+Rd,+Chetti+Kulam,+Simon+Nagar,+Nagercoil,+Tamil+Nadu+629001/@8.1606043,77.3511429,12.05z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3b04f11c81a499e3:0x9453e049b734ce4c!2m2!1d77.4307249!2d8.1749254?entry=ttu&g_ep=EgoyMDI2MDExOS4wIKXMDSoASAFQAw%3D%3D",
+            image: "https://upload.wikimedia.org/wikipedia/commons/0/04/Nagercoil_Clock_Tower.jpg",
+            color: "group-hover:shadow-orange-500/50"
+        }
+    ]
+};
+
+// EVENTS PAGE CONTENT
+export const eventsPageContent = {
+    hero: {
+        title: "GenZ Monthly Connect",
+        subtitle: "Your Space to Network, Learn, Grow"
+    },
+    upcoming: {
+        topic: "Coming Soon!",
+        description: "Join with us for an exclusive session on how AI is transforming. Dive into cutting-edge tools, real-world applications, and hands-on insights to supercharge your skills.",
+        date: "Event Date Drops Soon!",
+        location: "GenLab IB Office, Nagercoil",
+        fee: "₹200 (Collected at the event)",
+        perks: "E-certificate, Exciting goodies & refreshments",
+        limit: "Limited to 30 Participants!",
+        timerTarget: new Date(Date.now() + 1000 * 60 * 60 * 24 * 5) // 5 days from now dummy
+    },
+    whyJoin: [
+        {
+            id: "01",
+            title: "Network & Grow",
+            description: "Connect with like-minded peers, mentors & industry leaders."
+        },
+        {
+            id: "02",
+            title: "Engaging Sessions",
+            description: "Learn, share, and upskill through expert-led discussions."
+        },
+        {
+            id: "03",
+            title: "Fun & Impactful",
+            description: "Experience interactive meetups, challenges & real-world learning."
+        }
+    ],
+    whoCanJoin: [
+        {
+            title: "Students",
+            description: "Kickstart your journey, gain insights & discover new opportunities."
+        },
+        {
+            title: "Job Seekers",
+            description: "Connect with experts, unlock career paths & stay ahead."
+        },
+        {
+            title: "Working Professionals",
+            description: "Sharpen your skills, share experiences & grow with the community."
+        }
+    ],
+    benefits: [
+        {
+            title: "Engaging Discussions & Idea Exchange",
+            description: "Dive into thought-provoking conversations and creative brainstorming."
+        },
+        {
+            title: "GenLab IB Achievement Certificate",
+            description: "More than just a certificate, it's proof of your commitment to growth."
+        },
+        {
+            title: "Best Listener Award",
+            description: "Stand out and take home exclusive GenLab IB goodies!"
+        },
+        {
+            title: "Refreshments On Us",
+            description: "Because meaningful connections are best made over great snacks!"
+        }
+    ],
+    howItHelps: [
+        {
+            id: "01",
+            title: "Unlock New Opportunities",
+            description: "Connect with industry pros, mentors & peers who open doors to career growth."
+        },
+        {
+            id: "02",
+            title: "Real-World Learning",
+            description: "Gain hands-on insights, upskill with the latest trends & stay ahead of the curve."
+        },
+        {
+            id: "03",
+            title: "Build Your Tribe",
+            description: "Surround yourself with ambitious Gen Z go-getters who push you to level up."
+        }
+    ]
+};

@@ -70,9 +70,9 @@ const CustomCursor = () => {
         gsap.to(cursor, {
             width: 12,
             height: 12,
-            backgroundColor: '#000000', // Black for visibility on light bg
+            backgroundColor: '#fff',
             border: 'none',
-            mixBlendMode: 'normal',
+            mixBlendMode: 'difference',
             duration: 0.3
         });
     }
@@ -82,7 +82,7 @@ const CustomCursor = () => {
     <div
       ref={cursorRef}
       className={`fixed top-0 left-0 rounded-full pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2`}
-      style={{ width: 12, height: 12, backgroundColor: '#000000' }}
+      style={{ width: 12, height: 12, backgroundColor: '#fff', mixBlendMode: 'difference' }}
     />
   );
 };

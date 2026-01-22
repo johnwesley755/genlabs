@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ScrambleText from '../ui/ScrambleText';
+import ScrambleText from "../../ui/ScrambleText";
 import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);

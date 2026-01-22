@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { faqData } from '../../data/content';
+import { faqData } from '../../../data/content';
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);

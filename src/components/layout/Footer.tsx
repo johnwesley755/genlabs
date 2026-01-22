@@ -53,7 +53,7 @@ const Footer = () => {
                 </li>
                 <li>+91 999 464 6733</li>
                 <li className="text-white/40 pt-4">Nagercoil & Hyderabad</li>
-                <li>© 2025 GenLab IB.</li>
+                <li>© 2025 GenLab</li>
             </ul>
         </div>
         <div className="flex gap-4 flex-wrap">
@@ -77,18 +77,18 @@ const Footer = () => {
         </p>
         <h2 className="relative text-[15vw] font-bold leading-none tracking-tighter select-none">
             <span className="text-transparent" style={{ WebkitTextStroke: '2px white' }}>
-                GENLAB IB
+                GENLAB
             </span>
             <span 
                 className="absolute inset-0 text-genGreen overflow-hidden transition-all duration-700 ease-out"
                 style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)' }}
             >
-                GENLAB IB
+                GENLAB
             </span>
             <span className="absolute inset-0 text-genGreen overflow-hidden transition-all duration-700 ease-out group-hover:!clip-path-full"
                   style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 0)' }} 
                   aria-hidden="true">
-                GENLAB IB
+                GENLAB
             </span>
         </h2>
         <style dangerouslySetInnerHTML={{__html: `
@@ -111,7 +111,7 @@ const Footer = () => {
       {/* Bottom Marquee */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden py-4 border-t border-white/10 bg-black/50 backdrop-blur-sm">
           <div ref={marqueeRef} className="flex whitespace-nowrap gap-8 text-white/20 font-mono text-xs tracking-widest uppercase">
-              {Array(10).fill("GENLAB IB • CONNECT • CREATE • ELEVATE • ").map((text, i) => (
+              {Array(10).fill("GENLAB • CONNECT • CREATE • ELEVATE • ").map((text, i) => (
                   <span key={i}>{text}</span>
               ))}
           </div>

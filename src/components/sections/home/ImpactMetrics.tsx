@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { impactMetrics } from '../../data/content';
+import { impactMetrics } from '../../../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 
